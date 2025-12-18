@@ -175,3 +175,15 @@ li {
   100% { background-color: #eee; }
 }
 
+.workouts-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #00bcd4;
+  text-align: center;
+}
+.workouts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
