@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProgressChart from "./ProgressChart";
+import BarChart from "./BarChart";
+import Spinner from "../components/Spinner";
+import SkeletonWorkout from "../components/SkeletonWorkout";
 
 function WorkoutList() {
   const [workouts, setWorkouts] = useState([]);
@@ -27,7 +30,6 @@ function WorkoutList() {
 
   useEffect(() => {
     fetchWorkouts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = async (id) => {
@@ -49,30 +51,89 @@ function WorkoutList() {
     <div>
       <h2>My Workouts</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {loading && <p>Loading workouts...</p>}
+      {error && (
+        <div
+          style={{
+            backgroundColor: "#ffebee",
+            color: "#c62828",
+            padding: "1rem",
+            borderRadius: "6px",
+            margin: "1rem 0",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          {error}
+        </div>
+      )}
+
+      {loading && (
+        <ul style={{ padding: 0 }}>
+          {[...Array(3)].map((_, i) => (
+            <SkeletonWorkout key={i} />
+          ))}
+        </ul>
+      )}
 
       {!loading && workouts.length === 0 && !error && (
-        <p>No workouts found. Add your first one!</p>
+        <p style={{ textAlign: "center", marginTop: "1rem" }}>
+          No workouts found. Add your first one!
+        </p>
       )}
 
       {!loading && workouts.length > 0 && (
         <>
-          <ul>
+          <ul style={{ padding: 0 }}>
             {workouts.map((workout) => (
-              <li key={workout.id} style={{ marginBottom: "0.5rem" }}>
-                <strong>Date:</strong> {workout.date} |
-                <strong> Duration:</strong> {workout.duration} mins |
-                <strong> Calories:</strong> {workout.calories_burned}{" "}
-                <Link to={`/workouts/${workout.id}/edit`}>Edit</Link>{" "}
-                <button onClick={() => handleDelete(workout.id)}>Delete</button>
+              <li
+                key={workout.id}
+                style={{
+                  marginBottom: "1rem",
+                  backgroundColor: "white",
+                  padding: "1rem",
+                  borderRadius: "6px",
+                  boxShadow: "0 0 5px rgba(0,0,0,0.1)",
+                }}
+              >
+                <p>
+                  <strong>Date:</strong> {workout.date} |{" "}
+                  <strong>Duration:</strong> {workout.duration} mins |{" "}
+                  <strong>Calories:</strong> {workout.calories_burned}
+                </p>
+                <div style={{ marginTop: "0.5rem" }}>
+                  <Link
+                    to={`/workouts/${workout.id}/edit`}
+                    style={{
+                      marginRight: "1rem",
+                      color: "#00bcd4",
+                      fontWeight: "bold",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(workout.id)}
+                    style={{
+                      backgroundColor: "#c62828",
+                      color: "white",
+                      padding: "0.5rem 1rem",
+                      border: "none",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
 
-          {/* Progress chart below the list */}
           <div style={{ marginTop: "2rem" }}>
             <ProgressChart workouts={workouts} />
+            <BarChart workouts={workouts} />
           </div>
         </>
       )}
