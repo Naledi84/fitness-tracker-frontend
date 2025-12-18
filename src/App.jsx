@@ -6,6 +6,7 @@ import WorkoutAdd from "./pages/WorkoutAdd";
 import logo from "./assets/logo (3).png";
 import WorkoutEdit from "./pages/WorkoutEdit";
 import NutritionLog from "./pages/NutritionLog";
+import Exercises from "./pages/Exercises";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Link to="/workouts">My Workouts</Link> |
           <Link to="/add-workout">Add Workout</Link> |
           <Link to="/nutrition">Nutrition Log</Link>
+          <Link to="/exercises">Exercises</Link>
         </nav>
       </header>
 
@@ -29,6 +31,7 @@ function App() {
           <Route path="/add-workout" element={<WorkoutAdd />} />
           <Route path="/workouts/:id/edit" element={<WorkoutEdit />} />
           <Route path="/nutrition" element={<NutritionLog />} />
+          <Route path="/exercises" element={<Exercises />} />
         </Routes>
       </main>
     </Router>
