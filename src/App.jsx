@@ -41,7 +41,6 @@ function LogoutButton() {
   );
 }
 
-
 function App() {
   return (
     <AuthProvider>
@@ -81,11 +80,59 @@ function App() {
           </div>
         </header>
 
-        <main className="page-content">{/* Routes remain the same */}</main>
+        <main className="page-content">
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* Protected routes */}
+            <Route
+              path="/workouts"
+              element={
+                <ProtectedRoute>
+                  <WorkoutList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/add-workout"
+              element={
+                <ProtectedRoute>
+                  <WorkoutAdd />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/workouts/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <WorkoutEdit />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/nutrition"
+              element={
+                <ProtectedRoute>
+                  <NutritionLog />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/exercises"
+              element={
+                <ProtectedRoute>
+                  <Exercises />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </main>
       </Router>
     </AuthProvider>
   );
 }
-
 
 export default App;
