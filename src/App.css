@@ -46,19 +46,18 @@ header h1 {
 nav {
   margin-top: 1rem;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* tighter spacing since separators are visible */
 }
 
 nav a {
   color: #00bcd4;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.3rem;   /* bigger than before, but smaller than logo */
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;   /* smooth transition */
+  transition: all 0.3s ease;
 }
 
 nav a:hover {
@@ -67,12 +66,11 @@ nav a:hover {
   transform: scale(1.1);
 }
 
-/* Active link highlighting with animation */
-nav a.active {
-  background-color: #00bcd4;
-  color: #222;
-  border-bottom: 2px solid #ff9800;
-  transition: all 0.4s ease;   /* smooth fade/slide effect */
+/* Separator styling */
+nav .separator {
+  color: #888;          /* subtle grey */
+  font-size: 1.3rem;    /* match link size */
+  font-weight: normal;
 }
 
 

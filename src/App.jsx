@@ -21,10 +21,15 @@ function App() {
         <h1>Fitness Tracker</h1>
         <nav>
           <NavLink to="/register">Register</NavLink>
+          <span className="separator">|</span>
           <NavLink to="/login">Login</NavLink>
+          <span className="separator">|</span>
           <NavLink to="/workouts">My Workouts</NavLink>
+          <span className="separator">|</span>
           <NavLink to="/add-workout">Add Workout</NavLink>
+          <span className="separator">|</span>
           <NavLink to="/nutrition">Nutrition Log</NavLink>
+          <span className="separator">|</span>
           <NavLink to="/exercises">Exercises</NavLink>
         </nav>
       </header>
