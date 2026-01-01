@@ -10,9 +10,12 @@ function WorkoutEdit() {
     calories_burned: "",
   });
 
+  // Use VITE_API_URL from .env
+  const API_BASE = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch(`http://127.0.0.1:8000/api/workouts/${id}/`, {
+    fetch(`${API_BASE}/workouts/${id}/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -27,7 +30,7 @@ function WorkoutEdit() {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`http://127.0.0.1:8000/api/workouts/${id}/`, {
+    const response = await fetch(`${API_BASE}/workouts/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

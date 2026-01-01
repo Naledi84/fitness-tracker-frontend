@@ -7,6 +7,9 @@ function WorkoutAdd() {
     calories_burned: "",
   });
 
+  // Use VITE_API_URL from .env
+  const API_BASE = import.meta.env.VITE_API_URL;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -15,7 +18,7 @@ function WorkoutAdd() {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://127.0.0.1:8000/api/workouts/", {
+    const response = await fetch(`${API_BASE}/workouts/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

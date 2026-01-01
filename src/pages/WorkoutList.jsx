@@ -10,12 +10,15 @@ function WorkoutList() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Use VITE_API_URL from .env
+  const API_BASE = import.meta.env.VITE_API_URL;
+
   const fetchWorkouts = async () => {
     try {
       setLoading(true);
       setError(null);
       const token = localStorage.getItem("token");
-      const res = await fetch("http://127.0.0.1:8000/api/workouts/", {
+      const res = await fetch(`${API_BASE}/workouts/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Network error while loading workouts.");
@@ -35,7 +38,7 @@ function WorkoutList() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://127.0.0.1:8000/api/workouts/${id}/`, {
+      const res = await fetch(`${API_BASE}/workouts/${id}/`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

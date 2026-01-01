@@ -8,16 +8,19 @@ function NutritionLog() {
     calories: "",
   });
 
+  // Use VITE_API_URL from .env
+  const API_BASE = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("http://127.0.0.1:8000/api/nutrition/", {
+    fetch(`${API_BASE}/nutrition/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => setLogs(data));
-  }, []);
+  }, [API_BASE]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,7 +30,7 @@ function NutritionLog() {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://127.0.0.1:8000/api/nutrition/", {
+    const response = await fetch(`${API_BASE}/nutrition/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
